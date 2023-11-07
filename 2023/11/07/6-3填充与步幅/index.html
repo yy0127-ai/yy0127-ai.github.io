@@ -22,15 +22,15 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"yy0127-ai.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="影响卷积输出的大小：卷积核的大小、填充和步幅 1.填充 在应用多层卷积时，常常丢失边缘像素。由于我们通常使用小卷积核，因此对于任何单个卷积，我们可能只会丢失几个像素。 但随着我们应用许多连续卷积层，累积丢失的像素数就多了。 解决这个问题的简单方法即为填充（padding）：在输入图像的边界填充元素（通常填充元素是0）。 卷积神经网络中卷积核的高度和宽度通常为奇数，例如1、3、5或7。 选择奇数的好">
+    <meta name="description" content="影响卷积输出的大小：卷积核的大小、填充和步幅 1.填充 在应用多层卷积时，常常丢失边缘像素。由于我们通常使用小卷积核，因此对于任何单个卷积，我们可能只会丢失几个像素。 但随着我们应用许多连续卷积层，累积丢失的像素数就多了。 解决这个问题的简单方法即为填充（padding）：在输入图像的边界填充元素（通常填充元素是0）。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="6.3填充与步幅">
 <meta property="og:url" content="https://yy0127-ai.github.io/2023/11/07/6-3%E5%A1%AB%E5%85%85%E4%B8%8E%E6%AD%A5%E5%B9%85/index.html">
 <meta property="og:site_name" content="YYUE&#39;S BLOG">
-<meta property="og:description" content="影响卷积输出的大小：卷积核的大小、填充和步幅 1.填充 在应用多层卷积时，常常丢失边缘像素。由于我们通常使用小卷积核，因此对于任何单个卷积，我们可能只会丢失几个像素。 但随着我们应用许多连续卷积层，累积丢失的像素数就多了。 解决这个问题的简单方法即为填充（padding）：在输入图像的边界填充元素（通常填充元素是0）。 卷积神经网络中卷积核的高度和宽度通常为奇数，例如1、3、5或7。 选择奇数的好">
+<meta property="og:description" content="影响卷积输出的大小：卷积核的大小、填充和步幅 1.填充 在应用多层卷积时，常常丢失边缘像素。由于我们通常使用小卷积核，因此对于任何单个卷积，我们可能只会丢失几个像素。 但随着我们应用许多连续卷积层，累积丢失的像素数就多了。 解决这个问题的简单方法即为填充（padding）：在输入图像的边界填充元素（通常填充元素是0）。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-11-07T02:53:38.000Z">
-<meta property="article:modified_time" content="2023-11-07T05:25:08.467Z">
+<meta property="article:modified_time" content="2023-11-07T13:12:54.428Z">
 <meta property="article:author" content="yyue">
 <meta property="article:tag" content="卷积神经网络">
 <meta name="twitter:card" content="summary">
@@ -226,7 +226,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2023-11-07 10:53:38 / 修改时间：13:25:08" itemprop="dateCreated datePublished" datetime="2023-11-07T10:53:38+08:00">2023-11-07</time>
+      <time title="创建时间：2023-11-07 10:53:38 / 修改时间：21:12:54" itemprop="dateCreated datePublished" datetime="2023-11-07T10:53:38+08:00">2023-11-07</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -265,6 +265,8 @@
     <div class="post-body" itemprop="articleBody"><p><strong>影响卷积输出的大小：卷积核的大小、填充和步幅</strong></p>
 <h3 id="1-填充"><a href="#1-填充" class="headerlink" title="1.填充"></a>1.填充</h3><blockquote>
 <p>在应用多层卷积时，常常丢失边缘像素。由于我们通常使用小卷积核，因此对于任何单个卷积，我们可能只会丢失几个像素。 但随着我们应用许多连续卷积层，累积丢失的像素数就多了。 解决这个问题的简单方法即为<em>填充</em>（padding）：在输入图像的边界填充元素（通常填充元素是0）。</p>
+<span id="more"></span>
+
 <p>卷积神经网络中卷积核的高度和宽度通常为奇数，例如1、3、5或7。 选择奇数的好处是，保持空间维度的同时，我们可以在顶部和底部填充相同数量的行，在左侧和右侧填充相同数量的列。</p>
 <p>此外，使用奇数的核大小和填充大小也提供了书写上的便利。对于任何二维张量<code>X</code>，当满足： 1. 卷积核的大小是奇数； 2. 所有边的填充行数和列数相同； 3. 输出与输入具有相同高度和宽度 则可以得出：输出<code>Y[i, j]</code>是通过以输入<code>X[i, j]</code>为中心，与卷积核进行互相关计算得到的。</p>
 </blockquote>
