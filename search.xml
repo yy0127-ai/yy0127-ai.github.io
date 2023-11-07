@@ -36,4 +36,66 @@
         <tag>start</tag>
       </tags>
   </entry>
+  <entry>
+    <title>6.2卷积神经网络—图像卷积</title>
+    <url>/2023/11/07/%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E2%80%94%E5%9B%BE%E5%83%8F%E5%8D%B7%E7%A7%AF/</url>
+    <content><![CDATA[<h3 id="1-互相关运算"><a href="#1-互相关运算" class="headerlink" title="1.互相关运算"></a>1.互相关运算</h3><h4 id="1-1在corr2d函数中实现卷积过程"><a href="#1-1在corr2d函数中实现卷积过程" class="headerlink" title="1.1在corr2d函数中实现卷积过程"></a>1.1在corr2d函数中实现卷积过程</h4><p><strong>该函数接受输入张量X和卷积核张量K，并返回输出张量Y</strong></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">from</span> torch <span class="keyword">import</span> nn</span><br><span class="line"><span class="keyword">from</span> d2l <span class="keyword">import</span> torch <span class="keyword">as</span> d2l</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">corr2d</span>(<span class="params">X, K</span>): <span class="comment">#@save</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;计算二维互相关运算&quot;&quot;&quot;</span></span><br><span class="line">    h, w = K.shape  <span class="comment"># 卷积核的高 宽</span></span><br><span class="line">    Y = torch.zeros((X.shape[<span class="number">0</span>] - h + <span class="number">1</span>, X.shape[<span class="number">1</span>] - w + <span class="number">1</span>))  <span class="comment"># 初始化Y</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(Y.shape[<span class="number">0</span>]):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(Y.shape[<span class="number">1</span>]):</span><br><span class="line">            Y[i, j] = (X[i:i+h, j:j+w] * K).<span class="built_in">sum</span>()</span><br><span class="line">    <span class="keyword">return</span> Y</span><br></pre></td></tr></table></figure>
+
+<p><strong>输入张量X和卷积核张量K，验证上述二维互相关运算的输入</strong></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">X = torch.tensor([[<span class="number">0.0</span>, <span class="number">1.0</span>, <span class="number">2.0</span>], [<span class="number">3.0</span>, <span class="number">4.0</span>, <span class="number">5.0</span>], [<span class="number">6.0</span>, <span class="number">7.0</span>, <span class="number">8.0</span>]])</span><br><span class="line">K = torch.tensor([[<span class="number">0.0</span>, <span class="number">1.0</span>], [<span class="number">2.0</span>, <span class="number">3.0</span>]])</span><br><span class="line">corr2d(X, K)</span><br></pre></td></tr></table></figure>
+
+<p><strong>输出结果：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">tensor([[19., 25.],</span><br><span class="line">        [37., 43.]])</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-卷积层"><a href="#2-卷积层" class="headerlink" title="2.卷积层"></a>2.卷积层</h3><p><strong>卷积层对输入和卷积核权重进行互相关运算，并在添加标量偏置之后产生输出。因此卷积层中两个被训练的参数为卷积核权重和标量偏置</strong></p>
+<p><strong>基于上面定义的corr2d函数实现二维卷积层。在__init__构造函数中，将<code>weight</code>和<code>bias</code>声明为两个模型参数，前向传播函数调用<code>corr2d</code>函数并添加偏置</strong></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 卷积层</span></span><br><span class="line"><span class="comment"># 随机初始化权重</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Conv2D</span>(nn.Module):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, kernel_size</span>):</span><br><span class="line">        <span class="built_in">super</span>().__init__()</span><br><span class="line">        self.weight = nn.Parameter(torch.rand(kernel_size))</span><br><span class="line">        self.bias = nn.Parameter(torch.zeros(<span class="number">1</span>))</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, x</span>):</span><br><span class="line">        <span class="keyword">return</span> corr2d(x, self.weight) + bias</span><br></pre></td></tr></table></figure>
+
+<p><strong>使用上述函数：</strong></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">net = Conv2D((<span class="number">2</span>, <span class="number">2</span>))</span><br><span class="line">x = torch.tensor([[<span class="number">1.0</span>, <span class="number">2.0</span>, <span class="number">3.0</span>, <span class="number">4.0</span>],</span><br><span class="line">                   [<span class="number">5.0</span>, <span class="number">6.0</span>, <span class="number">7.0</span>, <span class="number">8.0</span>],</span><br><span class="line">                   [<span class="number">9.0</span>, <span class="number">10.0</span>, <span class="number">11.0</span>, <span class="number">12.0</span>],</span><br><span class="line">                   [<span class="number">13.0</span>, <span class="number">14.0</span>, <span class="number">15.0</span>, <span class="number">16.0</span>]], dtype=torch.float32)</span><br><span class="line">output = net(x)</span><br><span class="line">output</span><br></pre></td></tr></table></figure>
+
+<p><strong>结果为：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">tensor([[11.7987, 14.6210, 17.4432],</span><br><span class="line">        [23.0878, 25.9100, 28.7323],</span><br><span class="line">        [34.3768, 37.1990, 40.0213]], grad_fn=&lt;AddBackward0&gt;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-图像中目标的边缘检测"><a href="#3-图像中目标的边缘检测" class="headerlink" title="3.图像中目标的边缘检测"></a>3.图像中目标的边缘检测</h3><p><strong>通过找到像素变化的位置，来检测图像中不同颜色的边缘。 首先，我们构造一个6×8像素的黑白图像。中间四列为黑色（0），其余像素为白色（1）。</strong></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">X = torch.ones((<span class="number">6</span>,<span class="number">8</span>))</span><br><span class="line">X[:, <span class="number">2</span>:<span class="number">6</span>] = <span class="number">0</span></span><br><span class="line">X</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">tensor([[1., 1., 0., 0., 0., 0., 1., 1.],</span><br><span class="line">        [1., 1., 0., 0., 0., 0., 1., 1.],</span><br><span class="line">        [1., 1., 0., 0., 0., 0., 1., 1.],</span><br><span class="line">        [1., 1., 0., 0., 0., 0., 1., 1.],</span><br><span class="line">        [1., 1., 0., 0., 0., 0., 1., 1.],</span><br><span class="line">        [1., 1., 0., 0., 0., 0., 1., 1.]])</span><br></pre></td></tr></table></figure>
+
+<p><strong>接下来，我们构造一个高度为1、宽度为2的卷积核<code>K</code>。当进行互相关运算时，如果水平相邻的两元素相同，则输出为零，否则输出为非零。</strong></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">K = torch.tensor([[<span class="number">1.0</span>, -<span class="number">1.0</span>]])</span><br></pre></td></tr></table></figure>
+
+<p><strong>现在，我们对参数<code>X</code>（输入）和<code>K</code>（卷积核）执行互相关运算。 如下所示，输出<code>Y</code>中的1代表从白色到黑色的边缘，-1代表从黑色到白色的边缘，其他情况的输出为0。</strong></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">Y = corr2d(X, K)</span><br><span class="line">Y</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">tensor([[ 0.,  1.,  0.,  0.,  0., -1.,  0.],</span><br><span class="line">        [ 0.,  1.,  0.,  0.,  0., -1.,  0.],</span><br><span class="line">        [ 0.,  1.,  0.,  0.,  0., -1.,  0.],</span><br><span class="line">        [ 0.,  1.,  0.,  0.,  0., -1.,  0.],</span><br><span class="line">        [ 0.,  1.,  0.,  0.,  0., -1.,  0.],</span><br><span class="line">        [ 0.,  1.,  0.,  0.,  0., -1.,  0.]])</span><br></pre></td></tr></table></figure>
+
+<p><strong>现在我们将输入的二维图像转置，再进行如上的互相关运算。 其输出如下，之前检测到的垂直边缘消失了。 不出所料，这个卷积核<code>K</code>只可以检测垂直边缘，无法检测水平边缘。</strong></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">corr2d(X.t(), K)</span><br><span class="line"><span class="comment">#tensor([[0., 0., 0., 0., 0.],</span></span><br><span class="line"><span class="comment">#       [0., 0., 0., 0., 0.],</span></span><br><span class="line"><span class="comment">#       [0., 0., 0., 0., 0.],</span></span><br><span class="line"><span class="comment">#       [0., 0., 0., 0., 0.],</span></span><br><span class="line"><span class="comment">#       [0., 0., 0., 0., 0.],</span></span><br><span class="line"><span class="comment">#       [0., 0., 0., 0., 0.],</span></span><br><span class="line"><span class="comment">#       [0., 0., 0., 0., 0.],</span></span><br><span class="line"><span class="comment">#       [0., 0., 0., 0., 0.]])</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="4-学习卷积核"><a href="#4-学习卷积核" class="headerlink" title="4.学习卷积核"></a>4.学习卷积核</h3><p><strong>如果我们只需寻找黑白边缘，那么以上<code>[1, -1]</code>的边缘检测器足以。然而，当有了更复杂数值的卷积核，或者连续的卷积层时，我们不可能手动设计滤波器。那么我们是否可以学习由<code>X</code>生成<code>Y</code>的卷积核呢？</strong></p>
+<p><strong>现在让我们看看是否可以通过仅查看“输入-输出”对来学习由<code>X</code>生成<code>Y</code>的卷积核。 我们先构造一个卷积层，并将其卷积核初始化为随机张量。接下来，在每次迭代中，我们比较<code>Y</code>与卷积层输出的平方误差，然后计算梯度来更新卷积核。为了简单起见，我们在此使用内置的二维卷积层，并忽略偏置。</strong></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 学习卷积核</span></span><br><span class="line"><span class="comment"># 构造一个二维卷积层，具有1个输出通道和形状为(1, 2)的卷积核</span></span><br><span class="line">conv2d = nn.Conv2d(<span class="number">1</span>, <span class="number">1</span>, kernel_size=(<span class="number">1</span>, <span class="number">2</span>), bias=<span class="literal">False</span>) <span class="comment"># 1 1 表示输入通道、输出通道</span></span><br><span class="line"><span class="comment"># 这个二维卷积层使用四维输入和输出格式（批量大小、通道、高度、宽度）</span></span><br><span class="line"><span class="comment"># 其中批量大小和通道数都为1</span></span><br><span class="line">X = X.reshape((<span class="number">1</span>, <span class="number">1</span>, <span class="number">6</span>, <span class="number">8</span>))</span><br><span class="line">Y = Y.reshape((<span class="number">1</span>, <span class="number">1</span>, <span class="number">6</span>, <span class="number">7</span>))</span><br><span class="line">lr = <span class="number">3e-2</span> <span class="comment"># 学习率</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>):</span><br><span class="line">    Y_hat = conv2d(X)</span><br><span class="line">    l = (Y_hat - Y) ** <span class="number">2</span> <span class="comment"># 计算损失</span></span><br><span class="line">    conv2d.zero_grad()  <span class="comment"># 梯度清零</span></span><br><span class="line">    l.<span class="built_in">sum</span>().backward()  <span class="comment"># 向后传播</span></span><br><span class="line">    <span class="comment"># 迭代卷积</span></span><br><span class="line">    conv2d.weight.data[:] -= lr * conv2d.weight.grad  <span class="comment"># 更新梯度</span></span><br><span class="line">    <span class="keyword">if</span>(i + <span class="number">1</span>) %<span class="number">2</span> == <span class="number">0</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&#x27;epoch <span class="subst">&#123;i+<span class="number">1</span>&#125;</span>, loss <span class="subst">&#123;l.<span class="built_in">sum</span>():<span class="number">.3</span>f&#125;</span>&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p><strong>结果为：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">epoch 2, loss 2.360</span><br><span class="line">epoch 4, loss 0.514</span><br><span class="line">epoch 6, loss 0.134</span><br><span class="line">epoch 8, loss 0.042</span><br><span class="line">epoch 10, loss 0.015</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">conv2d.weight.data.reshape((<span class="number">1</span>, <span class="number">2</span>))</span><br><span class="line"><span class="comment"># tensor([[ 0.9590, -1.0091]]) 卷积核权重的结果很接近之前定义的卷积核K</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="5-小结"><a href="#5-小结" class="headerlink" title="5.小结"></a>5.小结</h3><ul>
+<li>二维卷积层的核心计算是二维互相关运算。最简单的形式是，对二维输入数据和卷积核执行互相关操作，然后添加一个偏置。</li>
+<li>我们可以设计一个卷积核来检测图像的边缘。</li>
+<li>我们可以从数据中学习卷积核的参数。</li>
+<li>学习卷积核时，无论用严格卷积运算或互相关运算，卷积层的输出不会受太大影响。</li>
+<li>当需要检测输入特征中更广区域时，我们可以构建一个更深的卷积网络。</li>
+</ul>
+]]></content>
+      <categories>
+        <category>卷积神经网络</category>
+      </categories>
+      <tags>
+        <tag>卷积神经网络</tag>
+      </tags>
+  </entry>
 </search>
