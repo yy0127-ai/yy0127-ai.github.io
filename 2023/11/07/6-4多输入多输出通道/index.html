@@ -26,17 +26,17 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="6.4多输入多输出通道">
 <meta property="og:url" content="https://yy0127-ai.github.io/2023/11/07/6-4%E5%A4%9A%E8%BE%93%E5%85%A5%E5%A4%9A%E8%BE%93%E5%87%BA%E9%80%9A%E9%81%93/index.html">
-<meta property="og:site_name" content="YYUE&#39;S BLOG">
+<meta property="og:site_name" content="蒜香茄子&#39;S BLOG">
 <meta property="og:description" content="多通道，当添加通道时，输入和隐藏的表示都变成三维张量。例如，每个RGB输入图像具有3 x h x w的形状，将这个大小为3的轴称为通道维度  当通道&gt;1时，卷积核的每个输入通道将包含一个二维张量，由于输入和卷积核都有c个通道，可以对每个通道输入的二维张量和卷积核的二维张量进行互相关运算，再对通道求和得到二维张量。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://yy0127-ai.github.io/2023/11/07/images/1.png">
+<meta property="og:image" content="https://yy0127-ai.github.io/2023/11/07/6-4%E5%A4%9A%E8%BE%93%E5%85%A5%E5%A4%9A%E8%BE%93%E5%87%BA%E9%80%9A%E9%81%93/images/1.png">
 <meta property="og:image" content="https://yy0127-ai.github.io/2023/11/07/images/2.png">
 <meta property="article:published_time" content="2023-11-07T05:27:58.000Z">
-<meta property="article:modified_time" content="2023-11-07T13:16:39.045Z">
-<meta property="article:author" content="yyue">
+<meta property="article:modified_time" content="2023-11-07T13:32:56.306Z">
+<meta property="article:author" content="蒜香茄子">
 <meta property="article:tag" content="卷积神经网络">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://yy0127-ai.github.io/2023/11/07/images/1.png">
+<meta name="twitter:image" content="https://yy0127-ai.github.io/2023/11/07/6-4%E5%A4%9A%E8%BE%93%E5%85%A5%E5%A4%9A%E8%BE%93%E5%87%BA%E9%80%9A%E9%81%93/images/1.png">
 
 
 <link rel="canonical" href="https://yy0127-ai.github.io/2023/11/07/6-4%E5%A4%9A%E8%BE%93%E5%85%A5%E5%A4%9A%E8%BE%93%E5%87%BA%E9%80%9A%E9%81%93/">
@@ -46,7 +46,7 @@
 <script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://yy0127-ai.github.io/2023/11/07/6-4%E5%A4%9A%E8%BE%93%E5%85%A5%E5%A4%9A%E8%BE%93%E5%87%BA%E9%80%9A%E9%81%93/","path":"2023/11/07/6-4多输入多输出通道/","title":"6.4多输入多输出通道"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>6.4多输入多输出通道 | YYUE'S BLOG</title>
+<title>6.4多输入多输出通道 | 蒜香茄子'S BLOG</title>
   
 
 
@@ -79,7 +79,7 @@
 
     <a href="/" class="brand" rel="start">
       <i class="logo-line"></i>
-      <p class="site-title">YYUE'S BLOG</p>
+      <p class="site-title">蒜香茄子'S BLOG</p>
       <i class="logo-line"></i>
     </a>
       <p class="site-subtitle" itemprop="description">welcome to my blog</p>
@@ -152,9 +152,9 @@
 
         <div class="site-overview-wrap sidebar-panel">
           <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <img class="site-author-image" itemprop="image" alt="yyue"
+    <img class="site-author-image" itemprop="image" alt="蒜香茄子"
       src="/images/photo.jpg">
-  <p class="site-author-name" itemprop="name">yyue</p>
+  <p class="site-author-name" itemprop="name">蒜香茄子</p>
   <div class="site-description" itemprop="description">人的全部本领无非是耐心和时间的混合物。</div>
 </div>
 <div class="site-state-wrap animated">
@@ -203,16 +203,16 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/photo.jpg">
-      <meta itemprop="name" content="yyue">
+      <meta itemprop="name" content="蒜香茄子">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="YYUE'S BLOG">
+      <meta itemprop="name" content="蒜香茄子'S BLOG">
       <meta itemprop="description" content="人的全部本领无非是耐心和时间的混合物。">
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="6.4多输入多输出通道 | YYUE'S BLOG">
+      <meta itemprop="name" content="6.4多输入多输出通道 | 蒜香茄子'S BLOG">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
@@ -229,7 +229,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2023-11-07 13:27:58 / 修改时间：21:16:39" itemprop="dateCreated datePublished" datetime="2023-11-07T13:27:58+08:00">2023-11-07</time>
+      <time title="创建时间：2023-11-07 13:27:58 / 修改时间：21:32:56" itemprop="dateCreated datePublished" datetime="2023-11-07T13:27:58+08:00">2023-11-07</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -271,7 +271,7 @@
 </blockquote>
 <span id="more"></span>
 
-<p><img src="../images/1.png"></p>
+<p><img src="./images/1.png"></p>
 <p><strong>实现多输入通道互相关运算，实际上是对每个通道执行互相关运算操作后将结果相加</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">from</span> d2l <span class="keyword">import</span> torch <span class="keyword">as</span> d2l</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">corr2d_multi_in</span>(<span class="params">X, K</span>):</span><br><span class="line">    <span class="comment"># 先遍历X和K的第0个维度(通道维度)，再把它们加在一起</span></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">sum</span>(d2l.corr2d(x, k) <span class="keyword">for</span> x, k <span class="keyword">in</span> <span class="built_in">zip</span>(X, K))</span><br><span class="line">X = torch.tensor([[[<span class="number">0.0</span>, <span class="number">1.0</span>, <span class="number">2.0</span>], [<span class="number">3.0</span>, <span class="number">4.0</span>, <span class="number">5.0</span>], [<span class="number">6.0</span>, <span class="number">7.0</span>, <span class="number">8.0</span>]],</span><br><span class="line">               [[<span class="number">1.0</span>, <span class="number">2.0</span>, <span class="number">3.0</span>], [<span class="number">4.0</span>, <span class="number">5.0</span>, <span class="number">6.0</span>], [<span class="number">7.0</span>, <span class="number">8.0</span>, <span class="number">9.0</span>]]]) <span class="comment"># 2 * 3 * 3</span></span><br><span class="line">K = torch.tensor([[[<span class="number">0.0</span>, <span class="number">1.0</span>], [<span class="number">2.0</span>, <span class="number">3.0</span>]], [[<span class="number">1.0</span>, <span class="number">2.0</span>], [<span class="number">3.0</span>, <span class="number">4.0</span>]]]) <span class="comment"># 2 * 2 * 2</span></span><br><span class="line">corr2d_multi_in(X, K)</span><br><span class="line"><span class="comment"># tensor([[ 56.,  72.],</span></span><br><span class="line"><span class="comment">#       [104., 120.]])</span></span><br></pre></td></tr></table></figure>
 
@@ -334,7 +334,7 @@
     <span class="with-love">
       <i class="fa fa-heart"></i>
     </span>
-    <span class="author" itemprop="copyrightHolder">yyue</span>
+    <span class="author" itemprop="copyrightHolder">蒜香茄子</span>
   </div>
 <div class="wordcount">
   <span class="post-meta-item">
