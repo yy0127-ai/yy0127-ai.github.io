@@ -154,7 +154,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">6</span>
+          <span class="site-state-item-count">9</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -182,6 +182,333 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://yy0127-ai.github.io/2023/11/09/leetcode%E5%88%B7%E9%A2%98-%E9%A2%98%E8%A7%A3-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/photo.jpg">
+      <meta itemprop="name" content="蒜香茄子">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="蒜香茄子'S BLOG">
+      <meta itemprop="description" content="人的全部本领无非是耐心和时间的混合物。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 蒜香茄子'S BLOG">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/11/09/leetcode%E5%88%B7%E9%A2%98-%E9%A2%98%E8%A7%A3-1/" class="post-title-link" itemprop="url">leetcode刷题-题解</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-11-09 22:24:45 / 修改时间：22:26:52" itemprop="dateCreated datePublished" datetime="2023-11-09T22:24:45+08:00">2023-11-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/leetcode%E5%88%B7%E9%A2%98/" itemprop="url" rel="index"><span itemprop="name">leetcode刷题</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>233</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="347-前K个高频元素"><a href="#347-前K个高频元素" class="headerlink" title="347.前K个高频元素"></a>347.前K个高频元素</h3><p><strong>描述：给你一个整数数组 nums 和一个整数 k ，请你返回其中出现频率前 k 高的元素。你可以按 任意顺序 返回答案。</strong>（好难啊/(ㄒoㄒ)/~~）</p>
+<blockquote>
+<p>示例1：<br>输入： nums = [1, 1, 1, 2, 2, 3] ,k = 2</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span>[] topKFrequent(<span class="type">int</span>[] nums, <span class="type">int</span> k) &#123;</span><br><span class="line">        Map&lt;Integer, Integer&gt; map = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();  <span class="comment">// 定义一个Map集合，用于存放key为nums的每一个数值，value为每一个数值出现的频次</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> n : nums)&#123;</span><br><span class="line">					<span class="comment">// getOrDefault()方法：若是有值返回n对应的value，无值返回0</span></span><br><span class="line">            map.put(n, map.getOrDefault(n, <span class="number">0</span>) + <span class="number">1</span>);  <span class="comment">// key为数组中的值n，value为频次</span></span><br><span class="line">        &#125;</span><br><span class="line">        PriorityQueue&lt;Map.Entry&lt;Integer, Integer&gt;&gt; queue = <span class="keyword">new</span> <span class="title class_">PriorityQueue</span>&lt;&gt;((e1, e2) -&gt; e2.getValue() - e1.getValue());  <span class="comment">// 比较器,优先级队列 若e1.getValue()大则返回负数</span></span><br><span class="line">        queue.addAll(map.entrySet());  <span class="comment">// 大根堆 </span></span><br><span class="line">        <span class="type">int</span>[] ans = <span class="keyword">new</span> <span class="title class_">int</span>[k]; </span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; k &amp;&amp; !queue.isEmpty(); ++i)&#123;</span><br><span class="line">            ans[i] = queue.poll().getKey();  <span class="comment">//删除堆顶，堆尾元素补上并且进行大根堆调整</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://yy0127-ai.github.io/2023/11/08/6-6%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C-LeNet/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/photo.jpg">
+      <meta itemprop="name" content="蒜香茄子">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="蒜香茄子'S BLOG">
+      <meta itemprop="description" content="人的全部本领无非是耐心和时间的混合物。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 蒜香茄子'S BLOG">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/11/08/6-6%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C-LeNet/" class="post-title-link" itemprop="url">6.6卷积神经网络(LeNet)</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-11-08 14:49:59 / 修改时间：15:15:08" itemprop="dateCreated datePublished" datetime="2023-11-08T14:49:59+08:00">2023-11-08</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" itemprop="url" rel="index"><span itemprop="name">卷积神经网络</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>472</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>2 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><strong>为了能够应用softmax回归和多层感知机，我们首先将每个大小为28×28的图像展平为一个784维的固定长度的一维向量，然后用全连接层对其进行处理。而现在，我们已经掌握了卷积层的处理方法，我们可以在图像中保留空间结构。 同时，用卷积层代替全连接层的另一个好处是：模型更简洁、所需的参数更少。</strong></p>
+<h3 id="1-LeNet"><a href="#1-LeNet" class="headerlink" title="1. LeNet"></a>1. LeNet</h3><p>LeNet由两个部分组成：</p>
+<ul>
+<li>卷积编码器：由两个卷积层组成</li>
+<li>全连接层密集块：由三个全连接层组成</li>
+</ul>
+<p><img src="../images/3.png"></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/11/08/6-6%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C-LeNet/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://yy0127-ai.github.io/2023/11/08/6-5%E6%B1%87%E8%81%9A%E5%B1%82/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/photo.jpg">
+      <meta itemprop="name" content="蒜香茄子">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="蒜香茄子'S BLOG">
+      <meta itemprop="description" content="人的全部本领无非是耐心和时间的混合物。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 蒜香茄子'S BLOG">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/11/08/6-5%E6%B1%87%E8%81%9A%E5%B1%82/" class="post-title-link" itemprop="url">6.5pooling层</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-11-08 14:04:43 / 修改时间：14:46:48" itemprop="dateCreated datePublished" datetime="2023-11-08T14:04:43+08:00">2023-11-08</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" itemprop="url" rel="index"><span itemprop="name">卷积神经网络</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>972</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>4 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><strong>我们的机器学习任务通常会跟全局图像的问题有关（例如，“图像是否包含一只猫呢？”），所以我们最后一层的神经元应该对整个输入的全局敏感。通过逐渐聚合信息，生成越来越粗糙的映射，最终实现学习全局表示的目标，同时将卷积图层的所有优势保留在中间层。</strong></p>
+<p><strong>检测较底层的特征时，通常希望这些特征保持某种程度上的平移不变性</strong></p>
+<blockquote>
+<p>本节将介绍pooling层，它具有双重目的：降低卷积层对位置的敏感性，同时降低对空间降采样表示的敏感性。</p>
+</blockquote>
+<h3 id="1-最大池化层和平均池化层"><a href="#1-最大池化层和平均池化层" class="headerlink" title="1.最大池化层和平均池化层"></a>1.最大池化层和平均池化层</h3><p><strong>池化层运算符由一个固定形状的窗口组成，该窗口根据其步幅大小在输入的所有区域上滑动，为池化窗口遍历的每个位置计算一个输出。不同于卷积层中的输入与卷积核之间的互相关计算，池化层不包含参数。池运算是确定性的，通常计算池化窗口中所有元素的最大值或平均值。分别为最大池化层和平均池化层</strong></p>
+<blockquote>
+<p>在下面的pool2d函数实现了池化层的前向传播，这里没有卷积核，输出为输入中每个区域的最大值或平均值。</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">from</span> torch <span class="keyword">import</span> nn</span><br><span class="line"><span class="keyword">from</span> d2l <span class="keyword">import</span> torch <span class="keyword">as</span> d2l</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">pool2d</span>(<span class="params">X, pool_size, mode=<span class="string">&#x27;max&#x27;</span></span>):</span><br><span class="line">    p_h, p_w = pool_size</span><br><span class="line">    Y = torch.zeros((X.shape[<span class="number">0</span>] - p_h + <span class="number">1</span>, X.shape[<span class="number">1</span>] - p_w + <span class="number">1</span>))</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(Y.shape[<span class="number">0</span>]):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(Y.shape[<span class="number">1</span>]):</span><br><span class="line">            <span class="keyword">if</span> mode == <span class="string">&#x27;max&#x27;</span>:</span><br><span class="line">                Y[i, j] = X[i: i + p_h, j: j + p_w].<span class="built_in">max</span>()</span><br><span class="line">            <span class="keyword">elif</span> mode == <span class="string">&#x27;avg&#x27;</span>:</span><br><span class="line">                Y[i, j] = X[i: i + p_h, j: j + p_w].mean()</span><br><span class="line">    <span class="keyword">return</span> Y</span><br><span class="line"><span class="comment"># 构建输入张量X，验证二维最大池化层的输出</span></span><br><span class="line">X = torch.tensor([[<span class="number">0.0</span>, <span class="number">1.0</span>, <span class="number">2.0</span>], [<span class="number">3.0</span>, <span class="number">4.0</span>, <span class="number">5.0</span>], [<span class="number">6.0</span>, <span class="number">7.0</span>, <span class="number">8.0</span>]])</span><br><span class="line">pool2d(X, (<span class="number">2</span>, <span class="number">2</span>))</span><br><span class="line"><span class="comment"># tensor([[4., 5.],[7., 8.]])</span></span><br><span class="line"><span class="comment"># 验证平均池化层</span></span><br><span class="line">pool2d(X, (<span class="number">2</span>, <span class="number">2</span>), <span class="string">&#x27;avg&#x27;</span>)</span><br><span class="line"><span class="comment">#tensor([[2., 3.], [5., 6.]])</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-填充和步幅"><a href="#2-填充和步幅" class="headerlink" title="2.填充和步幅"></a>2.填充和步幅</h3><p><strong>与卷积层一样，池化层也可以改变输出形状，通过填充和步幅以获得所需的输出形状</strong></p>
+<blockquote>
+<p>使用二维最大池化层，演示填充和步幅，构造了一个输入张量，有四个维度，其中样本数和通道数都为1</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">X = torch.arange(<span class="number">16</span>, dtype=torch.float32).reshape((<span class="number">1</span>, <span class="number">1</span>, <span class="number">4</span>, <span class="number">4</span>))</span><br><span class="line"><span class="comment"># 默认情况下，深度学习框架中的步幅与池化窗口的大小相同，如果使用形状为(3, 3)的池化窗口，则步幅形状为(3, 3)</span></span><br><span class="line">pool2d = nn.MaxPool2d(<span class="number">3</span>)  <span class="comment"># 池化窗口形状为(3, 3) 步幅为(3, 3)</span></span><br><span class="line">pool2d(X)  <span class="comment"># tensor([[[[10.]]]])</span></span><br><span class="line"><span class="comment"># 可以设定任意大小的矩形池化窗口，并分别设定填充和步幅的高度和宽度</span></span><br><span class="line">pool2d = nn.MaxPool2d((<span class="number">2</span>, <span class="number">3</span>), stride=(<span class="number">2</span>, <span class="number">3</span>), padding=(<span class="number">0</span>,<span class="number">1</span>))</span><br><span class="line">pool2d(X)  <span class="comment"># tensor([[[[ 5.,  7.],[13., 15.]]]])</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="3-多个通道"><a href="#3-多个通道" class="headerlink" title="3.多个通道"></a>3.多个通道</h3><p><strong>在处理多通道输入数据时，汇聚层在每个输入通道上单独运算，而不是像卷积层一样在通道上对输入进行汇总。 这意味着汇聚层的输出通道数与输入通道数相同。</strong></p>
+<blockquote>
+<p>在通道维度上连结张量X和X+1，以构建具有2个通道的输入</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">X = torch.cat((X, X+<span class="number">1</span>))</span><br><span class="line">X  <span class="comment"># 两个通道 2*4*4</span></span><br><span class="line">pool2d = nn.MaxPool2d(<span class="number">3</span>, padding=<span class="number">1</span>, stride=<span class="number">2</span>)</span><br><span class="line">pool2d(X) <span class="comment"># 池化后输出通道数量仍是2</span></span><br><span class="line"><span class="comment"># tensor([[[[ 5.,  7.],[13., 15.]]],</span></span><br><span class="line"><span class="comment">#        [[[ 6.,  8.],[14., 16.]]]])</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="4-小结"><a href="#4-小结" class="headerlink" title="4.小结"></a>4.小结</h3><ul>
+<li>对于给定输入元素，最大池化层会输出该窗口内的最大值，平均池化层会输出该窗口内的平均值。</li>
+<li>池化层的主要优点之一是减轻卷积层对位置的过度敏感。</li>
+<li>我们可以指定池化层的填充和步幅。</li>
+<li>使用最大池化层以及大于1的步幅，可减少空间维度（如高度和宽度）。</li>
+<li>池化层的输出通道数与输入通道数相同。</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -809,13 +1136,13 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">4k</span>
+    <span title="站点总字数">6k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">15 分钟</span>
+    <span title="站点阅读时长">21 分钟</span>
   </span>
 </div>
 
