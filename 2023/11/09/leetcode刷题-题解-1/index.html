@@ -22,15 +22,15 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"yy0127-ai.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="347.前K个高频元素描述：给你一个整数数组 nums 和一个整数 k ，请你返回其中出现频率前 k 高的元素。你可以按 任意顺序 返回答案。（好难啊&#x2F;(ㄒoㄒ)&#x2F;~~）  示例1：输入： nums &#x3D; [1, 1, 1, 2, 2, 3] ,k &#x3D; 2  12345678910111213141516class Solution &amp;#123;    public int[] topKFreque">
+    <meta name="description" content="347.前K个高频元素描述：给你一个整数数组 nums 和一个整数 k ，请你返回其中出现频率前 k 高的元素。你可以按 任意顺序 返回答案。  示例1：输入： nums &#x3D; [1, 1, 1, 2, 2, 3] ,k &#x3D; 2  思考：为什么会用堆和二叉搜索树呢？  问题：查找topk1）大根堆：堆顶元素最大，取k个堆顶元素即可2）小根堆：维护只有k个节点的小根堆，每次加入节点时，判断是否大于小根">
 <meta property="og:type" content="article">
 <meta property="og:title" content="leetcode刷题-题解">
 <meta property="og:url" content="https://yy0127-ai.github.io/2023/11/09/leetcode%E5%88%B7%E9%A2%98-%E9%A2%98%E8%A7%A3-1/index.html">
 <meta property="og:site_name" content="蒜香茄子&#39;S BLOG">
-<meta property="og:description" content="347.前K个高频元素描述：给你一个整数数组 nums 和一个整数 k ，请你返回其中出现频率前 k 高的元素。你可以按 任意顺序 返回答案。（好难啊&#x2F;(ㄒoㄒ)&#x2F;~~）  示例1：输入： nums &#x3D; [1, 1, 1, 2, 2, 3] ,k &#x3D; 2  12345678910111213141516class Solution &amp;#123;    public int[] topKFreque">
+<meta property="og:description" content="347.前K个高频元素描述：给你一个整数数组 nums 和一个整数 k ，请你返回其中出现频率前 k 高的元素。你可以按 任意顺序 返回答案。  示例1：输入： nums &#x3D; [1, 1, 1, 2, 2, 3] ,k &#x3D; 2  思考：为什么会用堆和二叉搜索树呢？  问题：查找topk1）大根堆：堆顶元素最大，取k个堆顶元素即可2）小根堆：维护只有k个节点的小根堆，每次加入节点时，判断是否大于小根">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-11-09T14:24:45.000Z">
-<meta property="article:modified_time" content="2023-11-09T14:26:52.070Z">
+<meta property="article:modified_time" content="2023-11-10T05:56:38.816Z">
 <meta property="article:author" content="蒜香茄子">
 <meta property="article:tag" content="leetcode">
 <meta name="twitter:card" content="summary">
@@ -174,6 +174,14 @@
       </div>
   </nav>
 </div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/yy0127-ai" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;yy0127-ai" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/qq_45991857" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;qq_45991857" rel="noopener me" target="_blank"><i class="fab fa-crosshairs fa-fw"></i>CSDN</a>
+      </span>
+  </div>
 
         </div>
       </div>
@@ -224,9 +232,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2023-11-09 22:24:45 / 修改时间：22:26:52" itemprop="dateCreated datePublished" datetime="2023-11-09T22:24:45+08:00">2023-11-09</time>
+      <time title="创建时间：2023-11-09 22:24:45" itemprop="dateCreated datePublished" datetime="2023-11-09T22:24:45+08:00">2023-11-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-11-10 13:56:38" itemprop="dateModified" datetime="2023-11-10T13:56:38+08:00">2023-11-10</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -239,20 +253,27 @@
     </span>
 
   
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
     <span class="post-meta-break"></span>
     <span class="post-meta-item" title="本文字数">
       <span class="post-meta-item-icon">
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>233</span>
+      <span>2k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
+      <span>7 分钟</span>
     </span>
 </div>
 
@@ -262,11 +283,41 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><h3 id="347-前K个高频元素"><a href="#347-前K个高频元素" class="headerlink" title="347.前K个高频元素"></a>347.前K个高频元素</h3><p><strong>描述：给你一个整数数组 nums 和一个整数 k ，请你返回其中出现频率前 k 高的元素。你可以按 任意顺序 返回答案。</strong>（好难啊/(ㄒoㄒ)/~~）</p>
+    <div class="post-body" itemprop="articleBody"><h3 id="347-前K个高频元素"><a href="#347-前K个高频元素" class="headerlink" title="347.前K个高频元素"></a>347.前K个高频元素</h3><p><strong>描述：给你一个整数数组 nums 和一个整数 k ，请你返回其中出现频率前 k 高的元素。你可以按 任意顺序 返回答案。</strong></p>
 <blockquote>
 <p>示例1：<br>输入： nums = [1, 1, 1, 2, 2, 3] ,k = 2</p>
 </blockquote>
+<p><strong>思考：为什么会用堆和二叉搜索树呢？</strong></p>
+<blockquote>
+<p>问题：查找topk<br>1）大根堆：堆顶元素最大，取k个堆顶元素即可<br>2）小根堆：维护只有k个节点的小根堆，每次加入节点时，判断是否大于小根堆的堆顶，大于则删除堆顶，将新节点加入，最后将堆里的k个元素遍历出来即可<br>3）二叉搜索树：排好序了，左节点&lt;父节点&lt;右节点(对于一个节点来说)，可以取到树的最小值，跟新节点判断，若频次大，则删除最小值，加入频次大的值，此时要判断每个频次对应的数值size，size为1时直接删除该节点，size值大于1的话，删除list中的最后一个元素，因为此二叉树维护的是包含k个数据，而不是包含k个节点，也就是说相同频次对应的不同值存放在一个list中</p>
+</blockquote>
+<span id="more"></span>
+
+<p><strong>解法一：大根堆</strong></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span>[] topKFrequent(<span class="type">int</span>[] nums, <span class="type">int</span> k) &#123;</span><br><span class="line">        Map&lt;Integer, Integer&gt; map = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();  <span class="comment">// 定义一个Map集合，用于存放key为nums的每一个数值，value为每一个数值出现的频次</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> n : nums)&#123;</span><br><span class="line">					<span class="comment">// getOrDefault()方法：若是有值返回n对应的value，无值返回0</span></span><br><span class="line">            map.put(n, map.getOrDefault(n, <span class="number">0</span>) + <span class="number">1</span>);  <span class="comment">// key为数组中的值n，value为频次</span></span><br><span class="line">        &#125;</span><br><span class="line">        PriorityQueue&lt;Map.Entry&lt;Integer, Integer&gt;&gt; queue = <span class="keyword">new</span> <span class="title class_">PriorityQueue</span>&lt;&gt;((e1, e2) -&gt; e2.getValue() - e1.getValue());  <span class="comment">// 比较器,优先级队列 若e1.getValue()大则返回负数</span></span><br><span class="line">        queue.addAll(map.entrySet());  <span class="comment">// 大根堆 </span></span><br><span class="line">        <span class="type">int</span>[] ans = <span class="keyword">new</span> <span class="title class_">int</span>[k]; </span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; k &amp;&amp; !queue.isEmpty(); ++i)&#123;</span><br><span class="line">            ans[i] = queue.poll().getKey();  <span class="comment">//删除堆顶，堆尾元素补上并且进行大根堆调整</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>解法二：小根堆</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span>[] topKFrequent(<span class="type">int</span>[] nums, <span class="type">int</span> k) &#123;</span><br><span class="line">        <span class="comment">//小根堆</span></span><br><span class="line">        Map&lt;Integer, Integer&gt; counter = IntStream.of(nums).boxed().collect(Collectors.toMap(e -&gt; e, e -&gt; <span class="number">1</span>, Integer::sum));  <span class="comment">//Collector.toMap(function&lt;&gt; keyMapper, Function&lt;&gt; valueMapper, BinaryOpertor&lt;&gt; mergeFunction)  # 第一个函数将key映射为k，第二个函数将值映射为1(初始频次)，第三个函数，当出现两个对象key重复时，则会对这两个对象的value进行sum求和</span></span><br><span class="line">        <span class="comment">//则counter为Map集合，key为nums中的每个不重复的值，value为每个值出现频次</span></span><br><span class="line">        <span class="comment">//定义小根堆，根据数字频率自小到大排序</span></span><br><span class="line">        Queue&lt;Integer&gt; queue = <span class="keyword">new</span> <span class="title class_">PriorityQueue</span>&lt;&gt;((k1, k2) -&gt; counter.get(k1)-counter.get(k2));</span><br><span class="line">        <span class="comment">//遍历数组，维护一个大小为k的小根堆</span></span><br><span class="line">        <span class="comment">//不足k个直接将当前数字加入到堆中，否则判断堆中的最小次数是否小于当前数字的出现次数，若是，则删掉堆中出现次数最少的一个数字，将当前数字加入堆中</span></span><br><span class="line">        <span class="comment">//想法就是，堆的大小为k，然后想让堆中存在k个大频次，所以当存满k个对象时，就判断新的对象的频次是否大于小根堆堆顶(最小的频次)，大于则删掉堆顶，将新的对象加入，内部会进行堆调整</span></span><br><span class="line">        counter.forEach((num, fre) -&gt; &#123;</span><br><span class="line">            <span class="keyword">if</span>(queue.size() &lt; k)&#123;</span><br><span class="line">                queue.offer(num);</span><br><span class="line">            &#125;<span class="keyword">else</span> <span class="keyword">if</span>(counter.get(queue.peek()) &lt; fre)&#123;</span><br><span class="line">                queue.poll();</span><br><span class="line">                queue.offer(num);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="comment">//构造返回结果，从堆中将数据读取出来</span></span><br><span class="line">        <span class="type">int</span>[] res = <span class="keyword">new</span> <span class="title class_">int</span>[k];</span><br><span class="line">        <span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> num: queue)&#123;</span><br><span class="line">            res[i++] = num; </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>解法三：二叉搜索树</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span>[] topKFrequent(<span class="type">int</span>[] nums, <span class="type">int</span> k) &#123;</span><br><span class="line">        <span class="comment">//二叉搜索树</span></span><br><span class="line">        <span class="comment">//统计每个数字出现的次数</span></span><br><span class="line">        Map&lt;Integer, Integer&gt; map = IntStream.of(nums).boxed().collect(Collectors.toMap(e-&gt;e, e-&gt;<span class="number">1</span>, Integer::sum));</span><br><span class="line">        <span class="comment">//定义二叉搜索树：key是数字出现的次数，value是出现了key次的数字列表</span></span><br><span class="line">        TreeMap&lt;Integer, List&lt;Integer&gt;&gt; treeMap = <span class="keyword">new</span> <span class="title class_">TreeMap</span>&lt;&gt;();</span><br><span class="line">        <span class="comment">//维护一个有k个数字的二叉搜索树,左子树都比父节点小，右子树都比父节点大</span></span><br><span class="line">        <span class="comment">//不足k个直接将当前数字加入到树中，否则判断当前树中的最小次数是否小于当前出现数字的次数</span></span><br><span class="line">        <span class="comment">//若是，则删掉树中出现次数最少的一个数字，将当前数字加入树中</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">count</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(Map.Entry&lt;Integer, Integer&gt; entry: map.entrySet())&#123;</span><br><span class="line">            <span class="type">int</span> <span class="variable">num</span> <span class="operator">=</span> entry.getKey();</span><br><span class="line">            <span class="type">int</span> <span class="variable">fre</span> <span class="operator">=</span> entry.getValue();</span><br><span class="line">            <span class="keyword">if</span>(count &lt; k)&#123;</span><br><span class="line">                treeMap.computeIfAbsent(fre, ArrayList::<span class="keyword">new</span>).add(num);  <span class="comment">//指定的键未与值相连，则new一个ArrayList，将num添加到数组中，若相连则直接将num添加到数组中</span></span><br><span class="line">                count++;  <span class="comment">//计数的是list中的总元素个数，而不是节点个数</span></span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="comment">//此时count&gt;=k</span></span><br><span class="line">                <span class="comment">//取出第一个节点</span></span><br><span class="line">                Map.Entry&lt;Integer, List&lt;Integer&gt;&gt; firstEntry = treeMap.firstEntry();<span class="comment">//返回key最小的map映射</span></span><br><span class="line">                <span class="keyword">if</span>(fre &gt; firstEntry.getKey())&#123;<span class="comment">//当前对象的key频次大于treeMap中存在的最小频次，则将其添加到treMap中，并且删掉最小的频次</span></span><br><span class="line">                    treeMap.computeIfAbsent(fre, ArrayList::<span class="keyword">new</span>).add(num);</span><br><span class="line">                    List&lt;Integer&gt; list = firstEntry.getValue();<span class="comment">//出现频次对应的值</span></span><br><span class="line">                    <span class="keyword">if</span>(list.size() == <span class="number">1</span>)&#123;</span><br><span class="line">                        <span class="comment">//list中只有一个元素，也就是只有一个元素出现了该频次，则直接删除</span></span><br><span class="line">                        treeMap.pollFirstEntry();</span><br><span class="line">                    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                        list.remove(list.size() - <span class="number">1</span>);<span class="comment">//此时存在&gt;1的list，则直接将该list的最后一个值删掉</span></span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//返回构造结果</span></span><br><span class="line">        <span class="type">int</span>[] res = <span class="keyword">new</span> <span class="title class_">int</span>[k];</span><br><span class="line">        <span class="type">int</span> <span class="variable">idx</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(List&lt;Integer&gt; list: treeMap.values())&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> num : list)&#123;</span><br><span class="line">                res[idx++] = num;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>第四种方法：计数排序(桶排序)</strong><br><strong>算法思想：用一个数组来存储每个频次的数值，频次为数组的下标，数值所组成的数组为数组的每个下标对应的值</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span>[] topKFrequent(<span class="type">int</span>[] nums, <span class="type">int</span> k) &#123;</span><br><span class="line">        <span class="comment">//计数排序(桶排序)</span></span><br><span class="line">        <span class="comment">//统计每个数字出现的次数 [1, 2, 1, 3, 4, 1, 2]</span></span><br><span class="line">        Map&lt;Integer, Integer&gt; map = IntStream.of(nums).boxed().collect(Collectors.toMap(e-&gt;e, e-&gt;<span class="number">1</span>, Integer::sum));  <span class="comment">//&#123;1:3, 2:2, 3:1, 4:1&#125;</span></span><br><span class="line">        <span class="comment">//一个数字最多出现nums.length次，因此定义一个长度为nums.length+1的数组，freqList[i]表示存储出现次为i的所有数字</span></span><br><span class="line">        <span class="comment">//用一个list来存放出现i频次的数值，也就是每个位置都存放一个数字，而位置是由频次决定的</span></span><br><span class="line">        List&lt;Integer&gt;[] freqList = <span class="keyword">new</span> <span class="title class_">List</span>[nums.length + <span class="number">1</span>];</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i &lt; freqList.length; i++)&#123;</span><br><span class="line">            freqList[i] = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">        &#125;</span><br><span class="line">        map.forEach((num, freq)-&gt;&#123;</span><br><span class="line">            freqList[freq].add(num);</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="comment">//按照出现频次，从大到小遍历频次数组，构造返回结果</span></span><br><span class="line">        <span class="type">int</span>[] res = <span class="keyword">new</span> <span class="title class_">int</span>[k];</span><br><span class="line">        <span class="type">int</span> <span class="variable">idx</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">freq</span> <span class="operator">=</span> freqList.length-<span class="number">1</span>; freq &gt; <span class="number">0</span>; freq--)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> num: freqList[freq])&#123;</span><br><span class="line">                res[idx++] = num;</span><br><span class="line">                <span class="keyword">if</span>(idx == k)&#123;</span><br><span class="line">                    <span class="keyword">return</span> res;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>解法五：快速排序的变形方法</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span>[] topKFrequent(<span class="type">int</span>[] nums, <span class="type">int</span> k) &#123;</span><br><span class="line">        <span class="comment">//快排变形</span></span><br><span class="line">        <span class="comment">//统计每个数字出现的次数</span></span><br><span class="line">        Map&lt;Integer, Integer&gt; map = IntStream.of(nums).boxed().collect(Collectors.toMap(</span><br><span class="line">            e-&gt;e, e-&gt;<span class="number">1</span>, Integer::sum</span><br><span class="line">        ));</span><br><span class="line">        <span class="comment">//构造Pair数组，Pair.num表示数值，Pair.freq表示数字出现的次数</span></span><br><span class="line">        Pair[] pairs = IntStream.of(nums).distinct().boxed().map(num -&gt; <span class="keyword">new</span> <span class="title class_">Pair</span>(num, map.get(num))).toArray(Pair[]::<span class="keyword">new</span>);</span><br><span class="line">        <span class="comment">//使用快速变形 获取Pair数组中频次最大的k个元素(第4个参数是下标，因此是K-1)</span></span><br><span class="line">        Pair[] topKPairs = quickSelect(pairs, <span class="number">0</span>, pairs.length-<span class="number">1</span>, k-<span class="number">1</span>);</span><br><span class="line">        <span class="comment">//构造返回结果</span></span><br><span class="line">        <span class="type">int</span>[] res = <span class="keyword">new</span> <span class="title class_">int</span>[k];</span><br><span class="line">        <span class="type">int</span> <span class="variable">idx</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(Pair pair: topKPairs)&#123;</span><br><span class="line">            res[idx++] = pair.num;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">private</span> Pair[] quickSelect(Pair[] pairs, <span class="type">int</span> lo, <span class="type">int</span> hi, <span class="type">int</span> idx)&#123;</span><br><span class="line">        <span class="keyword">if</span>(lo &gt; hi)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Pair</span>[<span class="number">0</span>];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//快排切分后，j左边的数字出现的次数都大于等于pairs[j].freq, j右边出现的次数都小于等于pair[j].freq</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> partition(pairs, lo, hi);</span><br><span class="line">        <span class="comment">//如果j正好等于目标idx，说明当前数组中的[0, idx]就是出现次数最大的K个元素</span></span><br><span class="line">        <span class="keyword">if</span>(j == idx) &#123;</span><br><span class="line">            <span class="keyword">return</span> Arrays.copyOf(pairs, idx+<span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//否则根据j与idx的大小关系判断找左端还是右端</span></span><br><span class="line">        <span class="keyword">return</span> j &lt; idx ? quickSelect(pairs, j+<span class="number">1</span>, hi, idx) : quickSelect(pairs, lo, j-<span class="number">1</span>, idx);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> <span class="title function_">partition</span><span class="params">(Pair[] pairs, <span class="type">int</span> lo, <span class="type">int</span> hi)</span>&#123;</span><br><span class="line">        <span class="type">Pair</span> <span class="variable">v</span> <span class="operator">=</span> pairs[lo];</span><br><span class="line">        <span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> lo, j = hi + <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(<span class="literal">true</span>)&#123;</span><br><span class="line">            <span class="keyword">while</span>(++i &lt;= hi &amp;&amp; pairs[i].freq &gt; v.freq);</span><br><span class="line">            <span class="keyword">while</span>(--j &gt;= lo &amp;&amp; pairs[j].freq &lt; v.freq);</span><br><span class="line">            <span class="keyword">if</span>(i &gt;= j)&#123;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="type">Pair</span> <span class="variable">tmp</span> <span class="operator">=</span> pairs[i];</span><br><span class="line">            pairs[i] = pairs[j];</span><br><span class="line">            pairs[j] = tmp;</span><br><span class="line">        &#125;</span><br><span class="line">        pairs[lo] = pairs[j];</span><br><span class="line">        pairs[j] = v;</span><br><span class="line">        <span class="keyword">return</span> j;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Pair</span> &#123;</span><br><span class="line">    <span class="type">int</span> num;</span><br><span class="line">    <span class="type">int</span> freq;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Pair</span><span class="params">(<span class="type">int</span> num, <span class="type">int</span> freq)</span>&#123;</span><br><span class="line">        <span class="built_in">this</span>.num = num;</span><br><span class="line">        <span class="built_in">this</span>.freq = freq;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>总结：</p>
+<ul>
+<li>将数值，以及数值出现的频次存在map键值对中的方法：</li>
+<li><pre><code class="java">      //第二种
+      Map&lt;Integer, Integer&gt; map = new HashMap&lt;&gt;();
+      for(int num: nums)&#123;
+          map.put(num, map.getOrDefault(num, 0)+1)
+      &#125;
+</code></pre>
+</li>
+</ul>
+
     </div>
 
     
@@ -305,7 +356,7 @@
     <div class="footer-inner">
 
   <div class="copyright">
-    &copy; 2023-11 – 
+    &copy; 
     <span itemprop="copyrightYear">2023</span>
     <span class="with-love">
       <i class="fa fa-heart"></i>
@@ -317,14 +368,32 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">6k</span>
+    <span title="站点总字数">8k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">21 分钟</span>
+    <span title="站点阅读时长">27 分钟</span>
   </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
 </div>
 
     </div>
@@ -356,6 +425,7 @@
 
 
   
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 
 
