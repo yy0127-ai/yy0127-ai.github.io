@@ -22,28 +22,27 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"yy0127-ai.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="影响卷积输出的大小：卷积核的大小、填充和步幅 1.填充 在应用多层卷积时，常常丢失边缘像素。由于我们通常使用小卷积核，因此对于任何单个卷积，我们可能只会丢失几个像素。 但随着我们应用许多连续卷积层，累积丢失的像素数就多了。 解决这个问题的简单方法即为填充（padding）：在输入图像的边界填充元素（通常填充元素是0）。">
+    <meta name="description" content="人的全部本领无非是耐心和时间的混合物。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="6.3填充与步幅">
-<meta property="og:url" content="https://yy0127-ai.github.io/2023/11/07/6-3%E5%A1%AB%E5%85%85%E4%B8%8E%E6%AD%A5%E5%B9%85/index.html">
+<meta property="og:title" content="leetcode刷题-题解-14">
+<meta property="og:url" content="https://yy0127-ai.github.io/2023/11/16/leetcode%E5%88%B7%E9%A2%98-%E9%A2%98%E8%A7%A3-14/index.html">
 <meta property="og:site_name" content="蒜香茄子&#39;S BLOG">
-<meta property="og:description" content="影响卷积输出的大小：卷积核的大小、填充和步幅 1.填充 在应用多层卷积时，常常丢失边缘像素。由于我们通常使用小卷积核，因此对于任何单个卷积，我们可能只会丢失几个像素。 但随着我们应用许多连续卷积层，累积丢失的像素数就多了。 解决这个问题的简单方法即为填充（padding）：在输入图像的边界填充元素（通常填充元素是0）。">
+<meta property="og:description" content="人的全部本领无非是耐心和时间的混合物。">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-11-07T02:53:38.000Z">
-<meta property="article:modified_time" content="2023-11-07T13:12:54.428Z">
+<meta property="article:published_time" content="2023-11-16T11:14:08.000Z">
+<meta property="article:modified_time" content="2023-11-16T11:14:08.113Z">
 <meta property="article:author" content="蒜香茄子">
-<meta property="article:tag" content="卷积神经网络">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://yy0127-ai.github.io/2023/11/07/6-3%E5%A1%AB%E5%85%85%E4%B8%8E%E6%AD%A5%E5%B9%85/">
+<link rel="canonical" href="https://yy0127-ai.github.io/2023/11/16/leetcode%E5%88%B7%E9%A2%98-%E9%A2%98%E8%A7%A3-14/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://yy0127-ai.github.io/2023/11/07/6-3%E5%A1%AB%E5%85%85%E4%B8%8E%E6%AD%A5%E5%B9%85/","path":"2023/11/07/6-3填充与步幅/","title":"6.3填充与步幅"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://yy0127-ai.github.io/2023/11/16/leetcode%E5%88%B7%E9%A2%98-%E9%A2%98%E8%A7%A3-14/","path":"2023/11/16/leetcode刷题-题解-14/","title":"leetcode刷题-题解-14"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>6.3填充与步幅 | 蒜香茄子'S BLOG</title>
+<title>leetcode刷题-题解-14 | 蒜香茄子'S BLOG</title>
   
 
 
@@ -130,7 +129,7 @@
   
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+    <div class="sidebar-inner sidebar-overview-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -143,7 +142,6 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%A1%AB%E5%85%85"><span class="nav-text">1.填充</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E6%AD%A5%E5%B9%85"><span class="nav-text">2.步幅</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E6%80%BB%E7%BB%93"><span class="nav-text">3.总结</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -204,7 +202,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://yy0127-ai.github.io/2023/11/07/6-3%E5%A1%AB%E5%85%85%E4%B8%8E%E6%AD%A5%E5%B9%85/">
+    <link itemprop="mainEntityOfPage" href="https://yy0127-ai.github.io/2023/11/16/leetcode%E5%88%B7%E9%A2%98-%E9%A2%98%E8%A7%A3-14/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/photo.jpg">
@@ -217,12 +215,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="6.3填充与步幅 | 蒜香茄子'S BLOG">
+      <meta itemprop="name" content="leetcode刷题-题解-14 | 蒜香茄子'S BLOG">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          6.3填充与步幅
+          leetcode刷题-题解-14
         </h1>
 
         <div class="post-meta-container">
@@ -232,18 +230,8 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2023-11-07 10:53:38 / 修改时间：21:12:54" itemprop="dateCreated datePublished" datetime="2023-11-07T10:53:38+08:00">2023-11-07</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" itemprop="url" rel="index"><span itemprop="name">卷积神经网络</span></a>
-        </span>
+      <time title="创建时间：2023-11-16 19:14:08" itemprop="dateCreated datePublished" datetime="2023-11-16T19:14:08+08:00">2023-11-16</time>
     </span>
 
   
@@ -260,14 +248,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>1k</span>
+      <span>0</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>4 分钟</span>
+      <span>1 分钟</span>
     </span>
 </div>
 
@@ -277,40 +265,7 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><p><strong>影响卷积输出的大小：卷积核的大小、填充和步幅</strong></p>
-<h3 id="1-填充"><a href="#1-填充" class="headerlink" title="1.填充"></a>1.填充</h3><blockquote>
-<p>在应用多层卷积时，常常丢失边缘像素。由于我们通常使用小卷积核，因此对于任何单个卷积，我们可能只会丢失几个像素。 但随着我们应用许多连续卷积层，累积丢失的像素数就多了。 解决这个问题的简单方法即为<em>填充</em>（padding）：在输入图像的边界填充元素（通常填充元素是0）。</p>
-<span id="more"></span>
-
-<p>卷积神经网络中卷积核的高度和宽度通常为奇数，例如1、3、5或7。 选择奇数的好处是，保持空间维度的同时，我们可以在顶部和底部填充相同数量的行，在左侧和右侧填充相同数量的列。</p>
-<p>此外，使用奇数的核大小和填充大小也提供了书写上的便利。对于任何二维张量<code>X</code>，当满足： 1. 卷积核的大小是奇数； 2. 所有边的填充行数和列数相同； 3. 输出与输入具有相同高度和宽度 则可以得出：输出<code>Y[i, j]</code>是通过以输入<code>X[i, j]</code>为中心，与卷积核进行互相关计算得到的。</p>
-</blockquote>
-<p><strong>在下面的例子中，我们创建一个高度和宽度为3的二维卷积层，并在所有侧边填充1个像素。给定高度和宽度为8的输入，则输出的高度和宽度也是8。</strong></p>
-<blockquote>
-<p>因为padding=1，则8+2=10，输入为10 x 10，K = 3 x 3，则输出为(10-3+1) x (10-3+1) = 8 x 8</p>
-</blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">from</span> torch <span class="keyword">import</span> nn</span><br><span class="line"><span class="comment"># 定义一个计算卷积层的函数</span></span><br><span class="line"><span class="comment"># 此函数初始化卷积层权重，并对输入和输出提高和缩减相应的维数</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">comp_conv2d</span>(<span class="params">conv2d, X</span>):</span><br><span class="line">    <span class="comment"># 这里的(1, 1)表示批量大小和通道数都为1</span></span><br><span class="line">    X = X.reshape((<span class="number">1</span>, <span class="number">1</span>) + X.shape)  <span class="comment"># X.shape  (1, 1, 8, 8)</span></span><br><span class="line">    Y = conv2d(X)  <span class="comment"># 二维卷积层使用四维输入和输出格式</span></span><br><span class="line">    <span class="comment"># 省略前两个维度：批量大小和通道</span></span><br><span class="line">    <span class="keyword">return</span> Y.reshape(Y.shape[<span class="number">2</span>:])</span><br><span class="line"><span class="comment"># 每边都填充1行或1列，因此总共添加2行或2列</span></span><br><span class="line">conv2d = nn.Conv2d(<span class="number">1</span>, <span class="number">1</span>, kernel_size=<span class="number">3</span>, padding=<span class="number">1</span>)</span><br><span class="line">X = torch.rand(size=(<span class="number">8</span>, <span class="number">8</span>))</span><br><span class="line">comp_conv2d(conv2d, X).shape</span><br><span class="line"><span class="comment"># 结果：torch.Size([8, 8])</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>当卷积核的高度和宽度不同时，我们可以填充不同的高度和宽度，使输出和输入具有相同的高度和宽度。在如下示例中，我们使用高度为5，宽度为3的卷积核，高度和宽度两边的填充分别为2和1</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">conv2d = nn.Conv2d(<span class="number">1</span>,  <span class="number">1</span>, kernel_size=(<span class="number">5</span>, <span class="number">3</span>), padding=(<span class="number">2</span>, <span class="number">1</span>))</span><br><span class="line">comp_conv2d(conv2d, X).shape</span><br><span class="line"><span class="comment"># 结果：torch.Size([8, 8])</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="2-步幅"><a href="#2-步幅" class="headerlink" title="2.步幅"></a>2.步幅</h3><blockquote>
-<p>在计算互相关时，卷积窗口从输入张量的左上角开始，向下、向右滑动。 在前面的例子中，我们默认每次滑动一个元素。 但是，有时候为了高效计算或是缩减采样次数，卷积窗口可以跳过中间位置，每次滑动多个元素</p>
-<p>当垂直步幅为Sh、水平步幅为Sw时，输出形状为：(Nh-Kh+Ph+Sh)/Sh向下取整 + (Nw-Kw+Pw+Sw)/Sw向下取整。</p>
-<p>如果我们设置了Pℎ=Kℎ−1和Pw=Kw−1，则输出形状将简化为⌊(Nℎ+Sℎ−1)/Sℎ⌋×⌊(Nw+Sw−1)/Sw⌋。 更进一步，如果输入的高度和宽度可以被垂直和水平步幅整除，则输出形状将为(Nℎ/Sℎ)×(Nw/Sw)。</p>
-</blockquote>
-<p><strong>将高度和宽度的步幅设置为2，从而将输入的宽度和高度减半</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">conv2d = nn.Conv2d(<span class="number">1</span>, <span class="number">1</span>, kernel_size=<span class="number">3</span>, padding=<span class="number">1</span>, stride=<span class="number">2</span>)</span><br><span class="line">comp_conv2d(conv2d, X).shape</span><br><span class="line"><span class="comment"># torch.Size([4, 4])</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>复杂一点的例子</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">conv2d = nn.Conv2d(<span class="number">1</span>, <span class="number">1</span>, kernel_size=(<span class="number">3</span>, <span class="number">5</span>), padding=(<span class="number">0</span>, <span class="number">1</span>), stride=(<span class="number">3</span>, <span class="number">4</span>))</span><br><span class="line">comp_conv2d(conv2d, X).shape</span><br><span class="line"><span class="comment"># torch.Size([2, 2])</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="3-总结"><a href="#3-总结" class="headerlink" title="3.总结"></a>3.总结</h3><ul>
-<li>填充可以增加输出的高度和宽度。这常用来使输出与输入具有相同的高和宽。</li>
-<li>步幅可以减小输出的高和宽，例如输出的高和宽仅为输入的高和宽的1/n（n是一个大于1的整数）。</li>
-<li>填充和步幅可用于有效地调整数据的维度。</li>
-</ul>
-
+    <div class="post-body" itemprop="articleBody">
     </div>
 
     
@@ -318,22 +273,16 @@
     
 
     <footer class="post-footer">
-          <div class="post-tags">
-              <a href="/tags/%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" rel="tag"><i class="fa fa-tag"></i> 卷积神经网络</a>
-          </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2023/11/07/%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E2%80%94%E5%9B%BE%E5%83%8F%E5%8D%B7%E7%A7%AF/" rel="prev" title="6.2卷积神经网络—图像卷积">
-                  <i class="fa fa-angle-left"></i> 6.2卷积神经网络—图像卷积
+                <a href="/2023/11/16/leetcode%E5%88%B7%E9%A2%98-%E9%A2%98%E8%A7%A3-13/" rel="prev" title="leetcode刷题-题解-13">
+                  <i class="fa fa-angle-left"></i> leetcode刷题-题解-13
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2023/11/07/6-4%E5%A4%9A%E8%BE%93%E5%85%A5%E5%A4%9A%E8%BE%93%E5%87%BA%E9%80%9A%E9%81%93/" rel="next" title="6.4多输入多输出通道">
-                  6.4多输入多输出通道 <i class="fa fa-angle-right"></i>
-                </a>
             </div>
           </div>
     </footer>
